@@ -1,0 +1,5 @@
+{
+    "tableName": "AbagaussTable",
+    "partitionKeyName": "Serial",
+    "partitionKeyType": "S"
+}

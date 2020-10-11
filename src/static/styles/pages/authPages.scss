@@ -1,0 +1,148 @@
+.authPageWrapper {
+  background-color: black;
+
+  color: white;
+  min-width: 100vw;
+  min-height: 100vh;
+  position: absolute;
+  font-family: "Quicksand", sans-serif;
+
+  .backgroundImage {
+    background-color: black;
+    margin: auto;
+    filter: brightness(50%);
+    z-index: -1;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    img {
+      margin: auto;
+
+      @media screen and (max-width: 600px) {
+        margin-top: 220px;
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  .LogoGreeting {
+    margin: 50px auto 0 auto;
+    width: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .authPageLogo {
+      width: 50%;
+      max-width: 150px;
+      margin: auto;
+
+      @media screen and (max-width: 600px) {
+        max-width: 110px;
+      }
+    }
+
+    .authPageGreeting {
+      font-size: 30px;
+      font-weight: 100;
+      text-align: center;
+
+      @media screen and (max-width: 600px) {
+        font-size: 25px;
+      }
+    }
+  }
+  .authBox {
+    width: 400px;
+    margin: 20px auto 50px auto;
+    padding: 20px 40px;
+    border: 1px solid grey;
+    border-radius: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    box-shadow: 0 4px 8px 0 rgba(255, 255, 255, 0.2),
+      0 6px 20px 0 rgba(255, 255, 255, 0.19);
+
+    @media screen and (max-width: 600px) {
+      width: 80%;
+      padding: 20px 10px;
+    }
+
+    form {
+      width: 80%;
+    }
+
+    .authFormEntryComponent {
+      display: flex;
+      flex-direction: column;
+
+      .label {
+        margin: 8px 0;
+        font-size: 15px;
+        display: flex;
+        justify-content: space-between;
+
+        .loginErrorMessage {
+          color: red;
+        }
+      }
+
+      input {
+        background-color: white;
+        outline: none;
+        border: none;
+        border-radius: 0.5em;
+        height: 20px;
+        padding: 5px 12px;
+      }
+    }
+
+    .authForgotPassword {
+      width: 100%;
+      margin: 20px 0 0 0;
+      cursor: pointer;
+      text-align: center;
+
+      a {
+        text-decoration: none;
+        color: white;
+      }
+    }
+
+    .SubmitButton {
+      margin: 20px 0;
+      button {
+        background-color: black;
+        color: white;
+        width: 100%;
+        height: 30px;
+        border: 1px solid white;
+        outline: none;
+        border-radius: 0.5em;
+        padding: 5px;
+        transition: background-color 0.25s, color 0.25s;
+        font-family: "Quicksand";
+      }
+
+      button:hover {
+        background-color: white;
+        color: black;
+        font-weight: bold;
+      }
+    }
+
+    .signUpLink {
+      font-size: 12px;
+      text-align: center;
+
+      a {
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+.pageHeader {
+  position: fixed;
+  width: 100%;
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .logo {
+    margin: 0 20px 0 20px;
+    cursor: pointer;
+  }
+
+  .navList {
+    margin: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+      color: white;
+      text-decoration: none;
+      padding: 20px;
+      cursor: pointer;
+    }
+  }
+}

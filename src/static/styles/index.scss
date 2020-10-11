@@ -1,0 +1,9 @@
+@import "../../app/components//Header/Header.scss";
+@import "../../app/components/Sidebar//Sidebar.scss";
+@import "./pages/authPages.scss";
+@import "./pages/appPages.scss";
+
+body {
+  margin: 0;
+  font-family: "Libre-Franklin", "Quicksand", sans-serif;
+}
