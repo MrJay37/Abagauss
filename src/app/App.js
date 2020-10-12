@@ -18,12 +18,13 @@ class App extends React.Component {
     }
   }
   render() {
-    return (<Routes />);
+    return (<Routes {...this.props}/>);
   }
 }
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  utility: state.utility
 })
 
 const mapDispatchToProps = dispatch => ({

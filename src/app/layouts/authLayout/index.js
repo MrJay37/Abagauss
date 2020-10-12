@@ -1,8 +1,14 @@
 import React from 'react'
 import {withRouter} from 'react-router-dom'
 import { connect } from 'react-redux'
+import {redirect, pageLoaded} from '../../store/actions/utility'
 
 class AuthenticationLayout extends React.Component{
+    componentDidMount(){
+        this.props.redirect(null)
+        
+    }
+
     componentDidUpdate(){
         if(Object.values(this.props.auth[0].sessionData).length !== 0 ){
             this.props.history.push('/')
@@ -31,4 +37,9 @@ const mapStateToProps = (state) => ({
     auth: state.auth
 })
 
-export default withRouter(connect(mapStateToProps)(AuthenticationLayout))
+const mapDispatchToProps = (dispatch) => ({
+    redirect: (path) => dispatch(redirect(path)),
+    pageLoaded: () => dispatch(pageLoaded())
+})
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AuthenticationLayout))

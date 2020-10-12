@@ -13,6 +13,7 @@
       margin: 14px 0;
       height: 25px;
       display: flex;
+      align-items: center;
 
       .profileFormLabel {
         width: 150px;
@@ -36,6 +37,12 @@
         &:disabled {
           background-color: transparent;
         }
+      }
+
+      .errorIcon {
+        margin-left: 6px;
+        color: red;
+        font-size: 20px;
       }
     }
 

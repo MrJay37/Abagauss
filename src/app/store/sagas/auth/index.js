@@ -1,62 +1,76 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { Auth } from 'aws-amplify'
 import {storeUser, storeSignOut, storeCurrentUserInfo} from '../../actions/auth'
+import {pageLoading, pageLoaded, redirect } from '../../actions/utility'
 
 export function* signIn(action) {
     try {
+        yield put(pageLoading())
         yield Auth.signIn({
             username: action.username,
             password: action.password
           })
         const session = yield Auth.currentSession()
         yield put(storeUser(session))
+        yield put(pageLoaded())
     } catch (error) {
         console.log(error.message)
+        yield put(pageLoaded())
     }
 }
 
 export function* signUp(action) {
     try{
-        const response = yield Auth.signUp({
+        yield put(pageLoading())
+        yield Auth.signUp({
             username: action.user,
             password: action.password,
             attributes: {
                 email: action.email
             }
         })
-        console.log(response)
-        const session = yield Auth.currentSession()
-        yield put(storeUser(session))
-
+        yield put(redirect('/login'))
+        yield put(pageLoaded())
+        
     } catch(error) {
         console.log(error)
+        yield put(pageLoaded())
     }
 }
 
 export function* getUserInfo(){
     try{
+        yield put(pageLoading())
         const userInfo = yield Auth.currentUserInfo()
         yield put(storeCurrentUserInfo(userInfo))
+        yield put(pageLoaded())
     } catch(error){
-        console.log(error)
+        //console.log(error)
+        yield put(pageLoaded())
     }
 }
 
 export function* changePassword(action){
     try{
-        yield console.log(action)
-        //yield Auth.changePassword(action.username, action.oldPassword, action.password)
+        yield put(pageLoading())
+        const user = yield Auth.currentAuthenticatedUser()
+        yield Auth.changePassword(user, action.oldPassword, action.password)
+        yield put(pageLoaded())
     } catch(error){
         console.log(error)
+        yield put(pageLoaded())
     }
 }
 
 export function* signOut() {
     try{
+        yield put(pageLoading())
         yield Auth.signOut()
         yield put(storeSignOut())
+        yield put(pageLoaded())
     } catch(error) {
         console.log(error)
+        yield put(pageLoaded())
     }
 }
 
