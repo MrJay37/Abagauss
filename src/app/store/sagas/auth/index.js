@@ -1,6 +1,6 @@
 import { takeEvery, put } from 'redux-saga/effects'
 import { Auth } from 'aws-amplify'
-import {storeUser, storeSignOut} from '../../actions/auth'
+import {storeUser, storeSignOut, storeCurrentUserInfo} from '../../actions/auth'
 
 export function* signIn(action) {
     try {
@@ -33,6 +33,24 @@ export function* signUp(action) {
     }
 }
 
+export function* getUserInfo(){
+    try{
+        const userInfo = yield Auth.currentUserInfo()
+        yield put(storeCurrentUserInfo(userInfo))
+    } catch(error){
+        console.log(error)
+    }
+}
+
+export function* changePassword(action){
+    try{
+        yield console.log(action)
+        //yield Auth.changePassword(action.username, action.oldPassword, action.password)
+    } catch(error){
+        console.log(error)
+    }
+}
+
 export function* signOut() {
     try{
         yield Auth.signOut()
@@ -46,6 +64,8 @@ export function* watcherLoginUsage() {
     yield takeEvery('SIGN_IN_USER', signIn)
     yield takeEvery('SIGN_OUT_USER', signOut)
     yield takeEvery('SIGN_UP_USER', signUp)
+    yield takeEvery('GET_CURRENT_USER_INFO', getUserInfo)
+    yield takeEvery('CHANGE_USER_PASSWORD', changePassword)
 }
 
 export default {watcherLoginUsage}

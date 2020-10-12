@@ -1,4 +1,5 @@
-import Home from "./home";
+import Home from "./app/home/home";
+import Profile from "./app/profile"
 import Authentication from "./authentication";
 
-export { Home, Authentication };
+export { Home, Profile, Authentication };

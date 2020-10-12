@@ -12,7 +12,7 @@ const SignUpPage = (props) => {
             setError('confirm_password', 'validate')
             return
         }
-        props.signUp(data.username, data.password, data.email)
+        props.signUp(data.username, data.password, data.email, data.firstName, data.lastName)
     }
 
     return (

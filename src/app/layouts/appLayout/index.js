@@ -2,13 +2,18 @@ import React from "react";
 import {connect} from 'react-redux'
 import Header from "../../components/Header";
 import Sidebar from "../../components/Sidebar";
-import {withRouter, Redirect} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
 class AppLayout extends React.Component {
+  componentDidUpdate(){
+    if(Object.values(this.props.auth[0].sessionData).length === 0 ){
+      this.props.history.push('/login')
+    }
+  }
+
   render() {
     return (
       <div>
-        {this.props.auth.length === 0 && <Redirect to="/login" />}
         <Header />
         <Sidebar />
         <div className="content">{this.props.children}</div>

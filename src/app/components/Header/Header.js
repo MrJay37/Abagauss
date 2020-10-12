@@ -1,25 +1,38 @@
 import React from "react";
 import { connect} from 'react-redux'
 import { Link } from "react-router-dom";
-import { signOut } from '../../store/actions/auth'
+import { signOut, getCurrentUserInfo  } from '../../store/actions/auth'
+import { FiLogOut } from 'react-icons/fi'
 
-const Header = (props) => {
+class Header extends React.Component {
 
-  return (
-    <div className="pageHeader">
-      <div className="logo">Abagauss</div>
-      <ul className="navList">
-        <Link to="/login">
-          <li>Profile</li>
-        </Link>
-        <li onClick={props.signOut}>Settings</li>
-      </ul>
-    </div>
-  );
+  componentDidMount(){
+    this.props.getCurrentUserInfo()
+  }
+
+  render() {
+    const username = (this.props.auth[0].userInfo && this.props.auth[0].userInfo.username) || ''
+    return (
+      <div className="pageHeader">
+        <div className="logo"><Link to="/">Abagauss | Hey there, {username}</Link></div>
+        <ul className="navList">
+          <Link to="/profile">
+            <li>Profile</li>
+          </Link>
+          <li onClick={this.props.signOut} ><FiLogOut style={{color: 'white'}} /></li>
+        </ul>
+      </div>
+    );
+  }
 };
 
-const mapDispatchToProps = dispatch => ({
-  signOut: () => dispatch(signOut())
+const mapStateToProps = state => ({
+  auth: state.auth
 })
 
-export default connect(null, mapDispatchToProps)(Header);
+const mapDispatchToProps = dispatch => ({
+  signOut: () => dispatch(signOut()),
+  getCurrentUserInfo: () => dispatch(getCurrentUserInfo())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

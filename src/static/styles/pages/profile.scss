@@ -1,0 +1,59 @@
+.profileWrapper {
+  margin: 20px 0 0 20px;
+
+  .profileHeader {
+    font-size: 40px;
+  }
+
+  .profileForm {
+    width: 400px;
+    margin: 0;
+
+    .profileFormItem {
+      margin: 14px 0;
+      height: 25px;
+      display: flex;
+
+      .profileFormLabel {
+        width: 150px;
+      }
+
+      .profileInput {
+        border: 1px solid grey;
+        border-radius: 1em;
+        width: 200px;
+        padding: 2px 8px;
+        font-family: "Quicksand", sans-serif;
+        outline: none;
+      }
+
+      .profileDisabledInput {
+        border: none;
+        border-radius: 1em;
+        width: 200px;
+        padding: 2px 8px;
+
+        &:disabled {
+          background-color: transparent;
+        }
+      }
+    }
+
+    button {
+      margin: 5px 30px 0 0;
+      background-color: white;
+      border: 1px solid black;
+      height: 30px;
+      border-radius: 1em;
+      float: right;
+      outline: none;
+
+      &:hover {
+        background-color: black;
+        color: white;
+      }
+
+      transition: background-color 0.25s, color 0.25s;
+    }
+  }
+}

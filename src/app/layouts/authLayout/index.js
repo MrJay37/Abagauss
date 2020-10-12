@@ -1,11 +1,16 @@
 import React from 'react'
-import {withRouter, Redirect} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class AuthenticationLayout extends React.Component{
+    componentDidUpdate(){
+        if(Object.values(this.props.auth[0].sessionData).length !== 0 ){
+            this.props.history.push('/')
+        }
+    }
+
     render() {
         return <>
-            {this.props.auth.length !== 0 && <Redirect to="/" />}
             <div className="authPageWrapper">
                 {/* <div className="backgroundImage">
                     <img src={require('../../../static/media/images/abagauss/background.JPG')} alt="background image" />

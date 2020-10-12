@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Routes from './routes'
 import { connect } from 'react-redux'
 import "../static/styles/index.scss";
@@ -8,24 +8,18 @@ import {storeUser } from './store/actions/auth'
 
 Amplify.configure(AWSConfig)
 
-function App(props) {
-
-  useEffect( () => {
-    async function fetchUserData() {
-      try{
-        const response = await Auth.currentSession()
-        props.storeSession(response) 
-      }catch(error) {
-        
-      }
+class App extends React.Component {
+  async componentDidMount() {
+    try {
+      const response = await Auth.currentSession()
+      this.props.storeSession(response)
+    } catch(error) {
+      
     }
-
-    fetchUserData()
-  })
-
-  return (
-    <Routes />
-  );
+  }
+  render() {
+    return (<Routes />);
+  }
 }
 
 const mapStateToProps = state => ({
