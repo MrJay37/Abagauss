@@ -7,6 +7,7 @@ export default function AuthenticationRoutes() {
         <Switch>
             <Route path="/login" exact component={Authentication.Login} />
             <Route path="/signup" exact component={Authentication.SignUp} />
+            <Route path="/forgotpassword" exact component={Authentication.ForgotPassword} />
         </Switch>
     )
 }

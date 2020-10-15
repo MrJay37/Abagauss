@@ -11,7 +11,7 @@ class AppLayout extends React.Component {
   }
   
   componentDidUpdate(){
-    if(Object.values(this.props.auth[0].sessionData).length === 0 ){
+    if(!this.props.auth.sessionData){
       this.props.history.push('/login')
     }
   }

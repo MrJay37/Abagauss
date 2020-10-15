@@ -6,7 +6,7 @@ import {changePassword} from '../../../store/actions/auth'
 import { BiErrorCircle } from 'react-icons/bi'
 
 const Profile = props => {
-    const userInfo = props.auth[0].userInfo 
+    const userInfo = props.auth.userInfo 
     const {register, handleSubmit, errors, setError, reset} = useForm()
     
     const onSubmit = (data) => {

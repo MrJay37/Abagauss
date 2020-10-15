@@ -1,13 +1,24 @@
-import React from "react";
-import {Link} from 'react-router-dom'
+import React, { useEffect } from "react";
+import {Link, withRouter} from 'react-router-dom'
 import {connect} from 'react-redux'
-import { signIn } from '../../../store/actions/auth'
+import { signIn, initiateForgotPassword, cancelForgotPassword } from '../../../store/actions/auth'
 import {useForm} from 'react-hook-form'
 
 const LoginPage = (props) => {
+  useEffect(() => {
+    if(props.forgotPassword.requested){
+      props.cancelForgotPassword()
+    }
+  })
+
   const {register, handleSubmit, errors} = useForm()
 
-  const onSubmit = async (data) => {
+  const handleForgotPasswordClick =() => {
+    props.initiateForgotPassword()
+    props.history.push('/forgotpassword')
+  }
+
+  const onSubmit = (data) => {
     props.signIn(data.username, data.password)
   }
 
@@ -40,7 +51,7 @@ const LoginPage = (props) => {
           </div>
 
           <div className="authForgotPassword">
-            <div>Forgot password?</div>
+            <div onClick={handleForgotPasswordClick}>Forgot password?</div>
           </div>
 
           <div className="SubmitButton">
@@ -51,10 +62,14 @@ const LoginPage = (props) => {
         
   );
 };
-
+const mapStatetoProps = (state) => ({
+  forgotPassword: state.auth.forgotPassword
+})
 const mapDispatchToProps = dispatch => ({
-  signIn: (username, password) => dispatch(signIn(username, password))
+  signIn: (username, password) => dispatch(signIn(username, password)),
+  initiateForgotPassword: () => dispatch(initiateForgotPassword()),
+  cancelForgotPassword: () => dispatch(cancelForgotPassword())
 })
 
-export default connect(null, mapDispatchToProps)(LoginPage)
+export default withRouter(connect(mapStatetoProps, mapDispatchToProps)(LoginPage))
 

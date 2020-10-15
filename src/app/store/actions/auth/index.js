@@ -33,3 +33,21 @@ export const storeCurrentUserInfo = (info) => ({
     type: 'STORE_CURRENT_USER_INFO',
     info
 })
+
+export const initiateForgotPassword = () => ({
+    type: 'INITIATE_FORGOT_PASSWORD',
+    
+})
+
+export const forgotPassword = (username) => ({
+    type: 'FORGOT_PASSWORD_REQUEST',
+    username
+})
+
+export const codeSent = () => ({
+    type: 'CODE_SENT_TO_USER'
+})
+
+export const cancelForgotPassword = () => ({
+    type: 'CANCEL_FORGOT_PASSWORD'
+})

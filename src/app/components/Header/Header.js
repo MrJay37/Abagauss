@@ -5,13 +5,12 @@ import { signOut, getCurrentUserInfo  } from '../../store/actions/auth'
 import { FiLogOut } from 'react-icons/fi'
 
 class Header extends React.Component {
-
   componentDidMount(){
     this.props.getCurrentUserInfo()
   }
 
   render() {
-    const username = (this.props.auth[0].userInfo && this.props.auth[0].userInfo.username) || ''
+    const username = (this.props.auth.userInfo && this.props.auth.userInfo.username) || ''
     return (
       <div className="pageHeader">
         <div className="logo"><Link to="/">Abagauss | Hey there, {username}</Link></div>

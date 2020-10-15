@@ -7,6 +7,11 @@
   position: absolute;
   font-family: "Quicksand", sans-serif;
 
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+
   .backgroundImage {
     background-color: black;
     margin: auto;
