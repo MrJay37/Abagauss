@@ -12,6 +12,19 @@ export function* signIn(action) {
           })
         const session = yield Auth.currentSession()
         yield put(storeUser(session))
+        yield localStorage.setItem('__abagaussUser', true)
+        yield put(pageLoaded())
+    } catch (error) {
+        console.log(error.message)
+        yield put(pageLoaded())
+    }
+}
+
+export function* getCurrentSessionInfo(action) {
+    try {
+        yield put(pageLoading())
+        const session = yield Auth.currentSession()
+        yield put(storeUser(session))
         yield put(pageLoaded())
     } catch (error) {
         console.log(error.message)
@@ -80,6 +93,7 @@ export function* signOut() {
         yield put(pageLoading())
         yield Auth.signOut()
         yield put(storeSignOut())
+        yield localStorage.setItem('__abagaussUser', false)
         yield put(pageLoaded())
     } catch(error) {
         console.log(error)

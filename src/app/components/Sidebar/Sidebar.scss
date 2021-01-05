@@ -11,7 +11,26 @@
   justify-content: center;
 
   .sidebar {
-    padding: 20px 10px;
+    padding: 10px 0;
+    width: inherit;
     height: 100%;
+    display: flex;
+    flex-direction: column;
+
+    .sidebarOption {
+      text-align: center;
+      margin: 0 25px;
+      padding: 5px 0;
+      cursor: pointer;
+      border: 1px solid white;
+      border-radius: 1em;
+      transition: border-color 0.25s, color 0.25s, background-color 0.25s;
+
+      &:hover {
+        border-color: black;
+        background-color: white;
+        color: black;
+      }
+    }
   }
 }

@@ -5,13 +5,12 @@ import {redirect, pageLoaded} from '../../store/actions/utility'
 
 class AuthenticationLayout extends React.Component{
     componentDidMount(){
-        this.props.redirect(null)   
-    }
-
-    componentDidUpdate(){
-        if(this.props.auth.sessionData){
+        this.props.redirect(null)
+        const login = localStorage.getItem('__abagaussUser')
+        if(login === 'true'){
             this.props.history.push('/')
-        }
+          }
+
     }
 
     render() {

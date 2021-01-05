@@ -20,6 +20,10 @@ export const storeSignOut = () => ({
     type: 'STORE_SIGN_OUT'
 })
 
+export const getCurrentSessionInfo = () => ({
+    type: 'GET_CURRENT_SESSION_INFO'
+})
+
 export const getCurrentUserInfo = () => ({
     type: 'GET_CURRENT_USER_INFO'
 })
