@@ -1,33 +1,18 @@
 import { takeEvery, put } from 'redux-saga/effects'
-import { Auth } from 'aws-amplify'
-import {storeUser, storeSignOut, storeCurrentUserInfo, codeSent} from '../../actions/auth'
-import {pageLoading, pageLoaded, redirect,  } from '../../actions/utility'
+// import {storeUser, storeSignOut, storeCurrentUserInfo, codeSent} from '../../actions/auth'
+import api from '../../../../lib/api'
+import history from '../../history'
+import { pageLoading, pageLoaded  } from '../../actions/utility'
+import cookie from '../../../../lib/cookies'
 
 export function* signIn(action) {
     try {
         yield put(pageLoading())
-        yield Auth.signIn({
-            username: action.username,
-            password: action.password
-          })
-        const session = yield Auth.currentSession()
-        yield put(storeUser(session))
-        yield localStorage.setItem('__abagaussUser', true)
+        yield api.auth.signIn({email: action.username, password: action.password})
+        yield history.push('/')
         yield put(pageLoaded())
     } catch (error) {
-        console.log(error.message)
-        yield put(pageLoaded())
-    }
-}
-
-export function* getCurrentSessionInfo(action) {
-    try {
-        yield put(pageLoading())
-        const session = yield Auth.currentSession()
-        yield put(storeUser(session))
-        yield put(pageLoaded())
-    } catch (error) {
-        console.log(error.message)
+        console.log(error)
         yield put(pageLoaded())
     }
 }
@@ -35,27 +20,25 @@ export function* getCurrentSessionInfo(action) {
 export function* signUp(action) {
     try{
         yield put(pageLoading())
-        yield Auth.signUp({
-            username: action.user,
+        yield api.auth.signUp({
+            name: action.user,
+            email: action.email,
             password: action.password,
-            attributes: {
-                email: action.email
-            }
         })
-        yield put(redirect('/login'))
+        yield history.push('/login')
         yield put(pageLoaded())
-        
     } catch(error) {
         console.log(error)
         yield put(pageLoaded())
     }
+    
 }
 
 export function* getUserInfo(){
     try{
         yield put(pageLoading())
-        const userInfo = yield Auth.currentUserInfo()
-        yield put(storeCurrentUserInfo(userInfo))
+        // const userInfo = yield Auth.currentUserInfo()
+        // yield put(storeCurrentUserInfo(userInfo))
         yield put(pageLoaded())
     } catch(error){
         //console.log(error)
@@ -66,8 +49,8 @@ export function* getUserInfo(){
 export function* changePassword(action){
     try{
         yield put(pageLoading())
-        const user = yield Auth.currentAuthenticatedUser()
-        yield Auth.changePassword(user, action.oldPassword, action.password)
+        // const user = yield Auth.currentAuthenticatedUser()
+        // yield Auth.changePassword(user, action.oldPassword, action.password)
         yield put(pageLoaded())
     } catch(error){
         console.log(error)
@@ -78,9 +61,9 @@ export function* changePassword(action){
 export function* forgotPasswordRequest(action){
     try{
         yield put(pageLoading())
-        const response = yield Auth.forgotPassword(action.username)
-        console.log(response)
-        yield put(codeSent())
+        // const response = yield Auth.forgotPassword(action.username)
+        // console.log(response)
+        // yield put(codeSent())
         yield put(pageLoaded())
     } catch(error){
         console.log(error)
@@ -91,9 +74,10 @@ export function* forgotPasswordRequest(action){
 export function* signOut() {
     try{
         yield put(pageLoading())
-        yield Auth.signOut()
-        yield put(storeSignOut())
-        yield localStorage.setItem('__abagaussUser', false)
+        // yield Auth.signOut()
+        // yield put(storeSignOut())
+        yield cookie.removeCookie()
+        yield history.push('/login')
         yield put(pageLoaded())
     } catch(error) {
         console.log(error)

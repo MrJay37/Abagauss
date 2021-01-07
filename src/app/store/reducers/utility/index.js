@@ -1,6 +1,5 @@
 const UTILITY_DEFAULT = {
-    loading: false,
-    redirect: null
+    loading: false
 }
 
 const UtilityReducer = (state = UTILITY_DEFAULT, action) => {
@@ -15,12 +14,6 @@ const UtilityReducer = (state = UTILITY_DEFAULT, action) => {
             return {
                 ...state,
                 loading: false
-            }
-        
-        case 'REDIRECT': 
-            return {
-                ...state,
-                redirect: action.redirect
             }
 
         default:
